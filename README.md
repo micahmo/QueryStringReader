@@ -4,6 +4,8 @@
 # QueryStringReader
 A website that parses and provides easy access to query string parameters
 
+See it in action: https://query.micahmo.com
+
 # Credits
 
 [Icon](https://www.flaticon.com/free-icon/find_4420318) made by [Payungkead](https://www.flaticon.com/authors/payungkead) from [www.flaticon.com](https://www.flaticon.com/).
