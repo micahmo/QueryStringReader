@@ -16,7 +16,7 @@
         {
             <tr>
                 <td class="cell">@query.Key:</td>
-                <td class="cell copy">@query.Value</td>
+                <td class="cell copy">@query.Value<button style="margin: 0 0 0 20px" class="button-4" onclick="copyToClipboard('@query.Value')"><span class="oi oi-clipboard" aria-hidden="true"></span></button></td>
             </tr>
         }
     </table>
@@ -35,7 +35,7 @@ else
         {
             <tr>
                 <td class="cell">@fragment.Key:</td>
-                <td class="cell copy">@fragment.Value</td>
+                <td class="cell copy">@fragment.Value<button style="margin: 0 0 0 20px" class="button-4" onclick="copyToClipboard('@fragment.Value')"><span class="oi oi-clipboard" aria-hidden="true"></span></button></td>
             </tr>
         }
     </table>
