@@ -31,6 +31,15 @@ a:hover {
     color: #834C69;
 }
 
+/* https://stackoverflow.com/a/48930521/4206279 */
+.wrapper {
+    overflow-x: auto;
+}
+
+.wrapper table {
+    white-space: nowrap
+}
+
 /* https://getcssscan.com/css-buttons-examples */
 .button-4 {
     appearance: none;
