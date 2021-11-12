@@ -2,7 +2,7 @@
 
 
 # QueryStringReader
-A website that parses and provides easy access to query string parameters
+A website that parses and provides easy access to query string parameters. Built with Blazor WebAssembly, all code runs locally in the browser and is served statically by GitHub pages.
 
 See it in action: https://query.micahmo.com
 
