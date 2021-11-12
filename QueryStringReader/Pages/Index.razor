@@ -1,0 +1,81 @@
+﻿@page "/"
+@inject NavigationManager NavManager
+
+<h1>Welcome to Query String Parser!</h1>
+
+<p>Send your URL redirects to this address, and easily view and copy the query string and fragment values. <a href="/?foo=bar#baz=qux">Try it out.</a></p>
+
+<h3>Query String Parameters</h3>
+
+@if (_queryStringParameters.Any())
+{
+    @foreach (var query in _queryStringParameters)
+    {
+        <p>@query.Key: @query.Value</p>
+    }
+}
+else
+{
+    <p>No query string parameters detected.</p>
+}
+
+<h3>Fragments</h3>
+
+@if (_fragmentParameters.Any())
+{
+    @foreach (var fragment in _fragmentParameters)
+    {
+        <p>@fragment.Key: @fragment.Value</p>
+    }
+}
+else
+{
+    <p>No fragment string detected.</p>
+}
+
+@code {
+    protected override void OnInitialized()
+    {
+        NavManager.LocationChanged += NavManager_LocationChanged;
+        
+        // This handles the initial page load
+        ParseUri(NavManager.Uri);
+    }
+
+    void NavManager_LocationChanged(object sender, LocationChangedEventArgs e)
+    {
+        // This handles url changes without reloading the page
+        ParseUri(e.Location);
+    }
+
+    private void ParseUri(string uriStr)
+    {
+        _queryStringParameters.Clear();
+        _fragmentParameters.Clear();
+
+        var uri = new Uri(uriStr);
+        foreach (var queryParameter in QueryHelpers.ParseQuery(uri.Query))
+        {
+            _queryStringParameters.Add(queryParameter.Key, queryParameter.Value);
+        }
+
+        foreach (var fragmentParameter in QueryHelpers.ParseQuery(uri.Fragment))
+        {
+            string key = fragmentParameter.Key;
+
+            if (key.StartsWith('#') == true)
+            {
+                key = key.Substring(1, key.Length - 1);
+            }
+
+            _fragmentParameters.Add(key, fragmentParameter.Value);
+        }
+
+        // This forces the HTML to rerender even if the page isn't reloaded
+        StateHasChanged();
+    }
+
+    private readonly Dictionary<string, string> _queryStringParameters = new Dictionary<string, string>();
+
+    private readonly Dictionary<string, string> _fragmentParameters = new Dictionary<string, string>();
+}
