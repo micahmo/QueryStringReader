@@ -5,14 +5,21 @@
 
 <p>Send your URL redirects to this address, and easily view and copy the query string and fragment values. <a href="/?foo=bar#baz=qux">Try it out.</a></p>
 
+<hr/>
+
 <h3>Query String Parameters</h3>
 
 @if (_queryStringParameters.Any())
 {
-    @foreach (var query in _queryStringParameters)
-    {
-        <p>@query.Key: @query.Value</p>
-    }
+    <table>
+        @foreach (var query in _queryStringParameters)
+        {
+            <tr>
+                <td class="cell">@query.Key:</td>
+                <td class="cell copy">@query.Value</td>
+            </tr>
+        }
+    </table>
 }
 else
 {
@@ -23,10 +30,15 @@ else
 
 @if (_fragmentParameters.Any())
 {
-    @foreach (var fragment in _fragmentParameters)
-    {
-        <p>@fragment.Key: @fragment.Value</p>
-    }
+    <table>
+        @foreach (var fragment in _fragmentParameters)
+        {
+            <tr>
+                <td class="cell">@fragment.Key:</td>
+                <td class="cell copy">@fragment.Value</td>
+            </tr>
+        }
+    </table>
 }
 else
 {
